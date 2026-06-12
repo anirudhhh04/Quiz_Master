@@ -9,7 +9,7 @@ from db import get_connection
 
 quiz_bp = Blueprint("quiz",__name__)
 @quiz_bp.route("/create-quiz", methods=["POST"])
-@jwt_required()
+@jwt_required() #checking token valid or not
 def create_quiz():
     username = get_jwt_identity()
     data = request.get_json()
