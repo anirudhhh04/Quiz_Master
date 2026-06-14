@@ -29,4 +29,9 @@ if __name__ == "__main__":
 def handle_error(e):
     print("ERROR:", e)
     return {"error": str(e)}, 500
+import traceback
+@app.errorhandler(Exception)
+def handle_error(e):
+    traceback.print_exc()
+    return {"error": str(e)}, 500
     
