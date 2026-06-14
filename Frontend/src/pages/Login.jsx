@@ -17,6 +17,8 @@ function Login() {
 
       localStorage.setItem("token",response.data.token);
       alert("Login Successful");
+      localStorage.setItem("isNewUser","false");
+      localStorage.setItem("username",username);
       n("/dashboard");
 
     } catch (error) {

@@ -18,6 +18,8 @@ function Register() {
         password,
       });
       alert("Registration Successful");
+      localStorage.setItem("isNewUser","true");
+      localStorage.setItem("username",username);
       n("/");
     }catch (error) {
       alert(

@@ -15,6 +15,7 @@ def create_quiz():
     data = request.get_json()
     title = data.get("title")
     description = data.get("description")
+    total_questions = data["total_questions"]
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT id FROM users WHERE username=%s",(username,))
@@ -22,7 +23,7 @@ def create_quiz():
     if not user:
         return jsonify({"message": "User not found"}), 404
     user_id = user[0]
-    cursor.execute("""INSERT INTO quizzes(title,description,created_by)VALUES( %s, %s, %s)""",(title,description,user_id))
+    cursor.execute("""INSERT INTO quizzes(title,description,created_by,total_questions)VALUES( %s, %s, %s,%s)""",(title,description,user_id,total_questions))
     conn.commit()
     quiz_id = cursor.lastrowid  #fetching id of last row for adding next
     cursor.close()
@@ -64,7 +65,8 @@ def get_quizzes():
 def get_quiz(quiz_id):
     conn = get_connection()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("""SELECT  id,  question,  option_a,  option_b,  option_c,  option_d FROM questions WHERE quiz_id=%s""",(quiz_id,))
+    cursor.execute("""SELECT q.id,q.question,q.option_a,q.option_b,q.option_c,q.option_d,qu.title,qu.description FROM questions q
+            JOIN quizzes qu ON q.quiz_id = qu.id WHERE q.quiz_id = %s""", (quiz_id,))
     questions = cursor.fetchall()
     cursor.close()
     conn.close()
@@ -101,3 +103,56 @@ def submit_quiz():
     cursor.close()
     conn.close()
     return jsonify({"score": score,"total": total})
+
+@quiz_bp.route("/quiz-info/<int:quiz_id>")
+def quiz_info(quiz_id):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(""" SELECT  id, title, total_questions FROM quizzes WHERE id=%s """,(quiz_id,))
+    quiz = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return jsonify(quiz)
+
+@quiz_bp.route("/my-attempts", methods=["GET"])
+@jwt_required()
+def my_attempts():
+    username = get_jwt_identity()
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("""SELECT id FROM users WHERE username=%s""",(username,))
+    user = cursor.fetchone()
+    cursor.execute(""" SELECT q.title, a.score, a.attempted_at FROM attempts a JOIN quizzes q ON a.quiz_id = q.id WHERE a.user_id = %s ORDER BY a.attempted_at DESC""",
+        (user["id"],))
+    attempts = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return jsonify(attempts)
+
+@quiz_bp.route("/my-quizzes")
+@jwt_required()
+def my_quizzes():
+    username = get_jwt_identity()
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT id FROM users WHERE username=%s",(username,))
+    user = cursor.fetchone()
+    cursor.execute("""SELECT id, title, description, total_questions FROM quizzes WHERE created_by=%s ORDER BY created_at DESC""",(user["id"],))
+    quizzes = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return jsonify(quizzes)
+
+@quiz_bp.route("/delete-quiz/<int:quiz_id>", methods=["DELETE"])
+@jwt_required()
+def delete_quiz(quiz_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    # Delete child records first
+    cursor.execute("DELETE FROM attempts WHERE quiz_id=%s",(quiz_id,))
+    cursor.execute("DELETE FROM questions WHERE quiz_id=%s",(quiz_id,))
+    cursor.execute("DELETE FROM quizzes WHERE id=%s",(quiz_id,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return jsonify({"message": "Quiz deleted successfully"})
