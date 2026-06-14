@@ -1,6 +1,10 @@
 import mysql.connector
 from config import Config
 def get_connection():
+    print("HOST =", repr(Config.DB_HOST))
+    print("USER =", repr(Config.DB_USER))
+    print("DB =", repr(Config.DB_NAME))
+    print("PORT =", repr(Config.DB_PORT))
     connection = mysql.connector.connect(
         host=Config.DB_HOST,
         user=Config.DB_USER,
