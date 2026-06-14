@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
 import api from "../services/api";
+import { toast } from "react-hot-toast";
 
 function Login() {
   const n = useNavigate();
@@ -12,22 +13,18 @@ function Login() {
     e.preventDefault();
     try {
       setLoading(true);
-      const response =
-        await api.post("/login", {  username,  password,});
-
+      const response =await api.post("/login", {  username,  password,});
       localStorage.setItem("token",response.data.token);
-      alert("Login Successful");
       localStorage.setItem("isNewUser","false");
       localStorage.setItem("username",username);
-      n("/dashboard");
+      toast.success("Login successful");
+      setTimeout(() => { n("/dashboard");}, 1000); //for lagging 1 second
+    } 
+    catch (error) {
+  console.log("FULL ERROR:", error);
 
-    } catch (error) {
-
-      alert(
-        error.response?.data?.message || "Login Failed"
-      );
-
-    }
+  alert(error.message);
+}
     finally {
       setLoading(false);
     }

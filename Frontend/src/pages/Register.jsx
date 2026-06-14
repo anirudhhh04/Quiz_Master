@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
 import api from "../services/api";
+import { toast } from "react-hot-toast";
 
 function Register() {
   const n = useNavigate();
@@ -17,10 +18,10 @@ function Register() {
         username,
         password,
       });
-      alert("Registration Successful");
       localStorage.setItem("isNewUser","true");
       localStorage.setItem("username",username);
-      n("/");
+      toast.success("Registration successful");
+      setTimeout(() => { n("/dashboard");}, 1000); //for lagging 1 second
     }catch (error) {
       alert(
         error.response?.data?.message ||

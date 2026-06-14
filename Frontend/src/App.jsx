@@ -9,10 +9,12 @@ import QuizPage from "./pages/QuizPage";
 import Result from "./pages/Result.jsx";
 import MyAttempts from "./pages/MyAttempts";
 import MyQuizzes from "./pages/MyQuizzes";
+import {Toaster } from "react-hot-toast";
 function App() {
   return (
     <BrowserRouter>
-
+    <>
+    <Toaster/>
       <Routes>
 
         <Route
@@ -58,7 +60,7 @@ function App() {
             element={<MyQuizzes />}
         />
       </Routes>
-
+    </>
     </BrowserRouter>
   );
 }
