@@ -1,44 +1,26 @@
 # QuizMaster
 
-QuizMaster is a full-stack quiz management platform where users can register, log in, create quizzes, add questions, attempt quizzes, and track their quiz history.
+QuizMaster is a full-stack web application that allows users to create, manage, and participate in quizzes through an interactive and user-friendly interface.
 
-## Tech Stack
+## 🚀 Tech Stack
 
 ### Frontend
 
 * React
+* Vite
+* Tailwind CSS
+* React Router
 * Axios
 
 ### Backend
 
 * Flask
+* Flask-JWT-Extended
 * Flask-CORS
-* bcrypt
 
 ### Database
 
 * MySQL
-
----
-
-
-## Installation
-
-### Clone Repository
-
-```bash
-git clone <repository-url>
-cd Quiz_maker
-```
-
----
-
-## Backend Setup
-
-### Create Virtual Environment
-
-```bash
-python -m venv venv
 ```
 
 ### Activate Virtual Environment
