@@ -157,7 +157,3 @@ def delete_quiz(quiz_id):
     conn.close()
     return jsonify({"message": "Quiz deleted successfully"})
 
-@app.errorhandler(Exception)
-def handle_error(e):
-    print("ERROR:", e)
-    return {"error": str(e)}, 500
