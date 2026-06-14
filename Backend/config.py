@@ -1,7 +1,8 @@
+import os
 class Config:
-    SECRET_KEY = "quizmaster-secret-key"
-    DB_HOST = "localhost"
-    DB_USER = "root"
-    DB_PASSWORD = "12345" 
-    DB_NAME = "quizz"
-    JWT_SECRET_KEY = "jwt-secret-key"
+    SECRET_KEY = os.getenv("SECRET_KEY","quizmaster-secret-key")
+    DB_HOST = os.getenv("DB_HOST")
+    DB_USER = os.getenv("DB_USER")
+    DB_PASSWORD = os.getenv("DB_PASSWORD")
+    DB_NAME = os.getenv("DB_NAME")
+    JWT_SECRET_KEY = os.getenv( "JWT_SECRET_KEY", "jwt-secret-key")

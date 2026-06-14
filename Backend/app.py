@@ -5,6 +5,8 @@ from config import Config
 from routes.auth import auth_bp
 from routes.quiz import quiz_bp
 from datetime import timedelta
+from dotenv import load_dotenv
+load_dotenv()
 app = Flask(__name__)
 app.config["JWT_SECRET_KEY"] = Config.JWT_SECRET_KEY
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=24)
