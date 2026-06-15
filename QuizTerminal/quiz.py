@@ -1,5 +1,6 @@
+#my old quiz terminal code
+
 import mysql.connector
-import time
 x=mysql.connector.connect(user='root',host='localhost',passwd='20042004p',database='quiz')
 y=x.cursor()
 print('WELCOME TO QUIZ MAKER')
