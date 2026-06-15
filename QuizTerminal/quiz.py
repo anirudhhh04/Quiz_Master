@@ -1,7 +1,7 @@
 #my old quiz terminal code
 
 import mysql.connector
-x=mysql.connector.connect(user='root',host='localhost',passwd='20042004p',database='quiz')
+x=mysql.connector.connect(user='root',host='localhost',passwd='YOUR_PASSWORD',database='YOUR_DATABASE_NAME')
 y=x.cursor()
 print('WELCOME TO QUIZ MAKER')
 tr='true'
