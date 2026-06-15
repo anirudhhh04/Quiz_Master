@@ -2,7 +2,7 @@
 
 QuizMaster is a full-stack web application that allows users to create, manage, and participate in quizzes through an interactive and user-friendly interface.
 
-## 🚀 Tech Stack
+##  Tech Stack
 
 ### Frontend
 
