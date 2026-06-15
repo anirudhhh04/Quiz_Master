@@ -17,10 +17,7 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(quiz_bp)
 @app.route("/")
 def home():
-
-    return {
-        "message": "QuizMaster Backend Running"
-    }
+    return {  "message": "QuizMaster Backend Running"  }
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT",5000))
