@@ -1,23 +1,8 @@
-# QuizMaster
+# React + Vite
 
-QuizMaster is a full-stack web application that allows users to create, manage, and participate in quizzes through an interactive and user-friendly interface.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 🚀 Tech Stack
+Currently, two official plugins are available:
 
-### Frontend
-
-* React
-* Vite
-* Tailwind CSS
-* React Router
-* Axios
-
-### Backend
-
-* Flask
-* Flask-JWT-Extended
-* Flask-CORS
-
-### Database
-
-* MySQL
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
