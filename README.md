@@ -7,9 +7,7 @@ QuizMaster is a full-stack web application that allows users to create, manage, 
 ### Frontend
 
 * React
-* Vite
 * Tailwind CSS
-* React Router
 * Axios
 
 ### Backend
