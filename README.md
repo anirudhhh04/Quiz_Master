@@ -14,6 +14,7 @@ QuizMaster is a full-stack web application that allows users to create, manage, 
 
 ### Backend
 
+* Python
 * Flask
 * Flask-JWT-Extended
 * Flask-CORS
