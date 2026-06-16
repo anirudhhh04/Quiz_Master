@@ -18,12 +18,12 @@ function Login() {
       localStorage.setItem("isNewUser","false");
       localStorage.setItem("username",username);
       toast.success("Login successful");
-      setTimeout(() => { n("/dashboard");}, 1000); //for lagging 1 second
+      n("/dashboard");
     } 
     catch (error) {
   console.log("FULL ERROR:", error);
 
-  alert(error.message);
+  toast.error(error.response?.data?.message || "Login failed.Please try again");
 }
     finally {
       setLoading(false);

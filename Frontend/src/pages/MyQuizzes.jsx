@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { FaTrash } from "react-icons/fa";
+import { toast } from "react-hot-toast";
 
 function MyQuizzes() {
   const [quizzes, setQuizzes] = useState([]);
@@ -37,7 +38,7 @@ function MyQuizzes() {
     } 
     catch (error) {
     console.log(error);
-    alert("Failed to delete quiz");
+    toast.error("Failed to delete quiz");
     }
 };
   return (

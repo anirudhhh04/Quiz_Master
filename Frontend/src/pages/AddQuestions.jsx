@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import api from "../services/api";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 function AddQuestions() {
   const { quizId } = useParams();
@@ -41,19 +42,18 @@ function AddQuestions() {
         },
         {
           headers: {
-            Authorization:
-              `Bearer ${token}`
+            Authorization: `Bearer ${token}`
           }
         }
       );
       const nextCount = currentCount + 1;
       setCurrentCount(nextCount);
       if (nextCount >= totalQuestions) {
-         alert("Quiz Completed Successfully");
+         toast.success("Quiz Completed Successfully");
          n("/dashboard");
          return;
       }
-      alert("Question Added");
+      toast.success("Question Added");
       setQuestion("");
       setOptionA("");
       setOptionB("");
@@ -63,8 +63,7 @@ function AddQuestions() {
     } catch (error) {
         console.log(error);
         console.log(error.response);
-
-      alert(JSON.stringify(error.response?.data));
+        toast.error(error.response?.data.message ||"Failed to add question");
 
     }
      finally { setLoading(false);     }
@@ -189,6 +188,7 @@ function AddQuestions() {
 
           <button
             type="submit"
+            disabled={loading}
             className="
             w-full
             bg-blue-600

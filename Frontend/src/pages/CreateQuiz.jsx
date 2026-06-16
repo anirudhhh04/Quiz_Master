@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import { toast } from "react-hot-toast";
 
 function CreateQuiz() {
   const n = useNavigate();
@@ -29,9 +30,10 @@ function CreateQuiz() {
           }
         );
       const quizId =response.data.quiz_id;
-      n(`/add-questions/${quizId}`);
+      toast.success("Quiz created successfully");
+      setTimeout(() => {n(`/add-questions/${quizId}`);}, 500);
     }catch (error) {
-      alert( error.response?.data?.message || "Failed to create quiz");
+      toast.error( error.response?.data?.message || "Failed to create quiz");
     }finally {
       setLoading(false);
     }

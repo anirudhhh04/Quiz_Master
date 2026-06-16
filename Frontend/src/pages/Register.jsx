@@ -23,10 +23,7 @@ function Register() {
       toast.success("Registration successful");
       setTimeout(() => { n("/dashboard");}, 1000); //for lagging 1 second
     }catch (error) {
-      alert(
-        error.response?.data?.message ||
-          "Registration Failed"
-      );
+      toast.error(error.response?.data?.message ||"Registration Failed");
     } finally {
       setLoading(false);
     }
