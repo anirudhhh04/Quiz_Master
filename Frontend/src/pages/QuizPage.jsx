@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../services/api";
+import { toast } from "react-hot-toast";
+
 function QuizPage() {
 
   const { id } = useParams();
@@ -45,7 +47,7 @@ function QuizPage() {
           }
         }
       );
-
+    toast.success("Quiz completed successfully");
     n("/result",{state: response.data});
   } catch (error) {
     console.log(error);

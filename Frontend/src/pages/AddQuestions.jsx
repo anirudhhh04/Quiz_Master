@@ -49,7 +49,7 @@ function AddQuestions() {
       const nextCount = currentCount + 1;
       setCurrentCount(nextCount);
       if (nextCount >= totalQuestions) {
-         toast.success("Quiz Completed Successfully");
+         toast.success("Quiz Created Successfully");
          n("/dashboard");
          return;
       }

@@ -30,7 +30,7 @@ function CreateQuiz() {
           }
         );
       const quizId =response.data.quiz_id;
-      toast.success("Quiz created successfully");
+      toast.success("Quiz added successfully");
       n(`/add-questions/${quizId}`);
     }catch (error) {
       toast.error( error.response?.data?.message || "Failed to create quiz");
