@@ -21,7 +21,7 @@ function Register() {
       localStorage.setItem("isNewUser","true");
       localStorage.setItem("username",username);
       toast.success("Registration successful");
-      setTimeout(() => { n("/dashboard");}, 1000); //for lagging 1 second
+      n("/dashboard");
     }catch (error) {
       toast.error(error.response?.data?.message ||"Registration Failed");
     } finally {

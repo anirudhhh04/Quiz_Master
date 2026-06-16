@@ -31,7 +31,7 @@ function CreateQuiz() {
         );
       const quizId =response.data.quiz_id;
       toast.success("Quiz created successfully");
-      setTimeout(() => {n(`/add-questions/${quizId}`);}, 500);
+      n(`/add-questions/${quizId}`);
     }catch (error) {
       toast.error( error.response?.data?.message || "Failed to create quiz");
     }finally {
